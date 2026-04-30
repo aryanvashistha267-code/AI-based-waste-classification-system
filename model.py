@@ -1,16 +1,14 @@
-import tensorflow as tf
 import numpy as np
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 CLASSES = ['biological','cardboard','glass','metal','paper','plastic','trash']
 
 def load_model():
-    return tf.keras.models.load_model("model.h5")
+    from tensorflow import keras
+    return keras.models.load_model("model.keras")
 
 def preprocess(img):
     img = img.resize((224, 224))
-    arr = np.array(img)
-    arr = preprocess_input(arr)
+    arr = np.array(img) / 255.0
     return np.expand_dims(arr, axis=0)
 
 def predict_with_probs(model, img):
@@ -22,12 +20,12 @@ def predict_with_probs(model, img):
 
 def get_suggestion(category):
     ideas = {
-        "plastic": "Reuse as plant pot or recycle.",
-        "paper": "Reuse for notes or recycle.",
-        "glass": "Recycle carefully to avoid injury.",
-        "metal": "Sell as scrap or recycle.",
-        "cardboard": "Reuse for storage or recycle.",
-        "trash": "Dispose in general waste.",
-        "biological": "Use for composting."
+        "plastic": "Reuse or recycle",
+        "paper": "Recycle",
+        "glass": "Recycle carefully",
+        "metal": "Recycle",
+        "cardboard": "Reuse or recycle",
+        "trash": "Dispose properly",
+        "biological": "Compost"
     }
     return ideas.get(category, "No suggestion available")
