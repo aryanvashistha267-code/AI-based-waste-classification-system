@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # AI Waste Classifier ♻️
 
 A simple AI system that classifies waste (plastic, paper, glass, metal, cardboard)
@@ -16,4 +16,4 @@ streamlit run app.py
 ## Notes
 - This demo uses a pretrained backbone without fine-tuning
 - Accuracy depends on image quality and similarity to training data
-=======
+
